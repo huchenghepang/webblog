@@ -1,0 +1,1 @@
+import{V as e}from"./index.esm-DueM3VUK.js";const i=async(a,t)=>{try{return await a.validate(t,{abortEarly:!1}),{valid:!0,errors:[]}}catch(r){if(r instanceof e)return{valid:!1,errors:r.errors};throw r}};export{i as v};

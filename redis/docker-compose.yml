@@ -1,0 +1,11 @@
+services:
+  redis:
+    build:
+      context: .  # 指定 Dockerfile 所在目录
+      dockerfile: dockerfile  # 使用当前目录下的 Dockerfile
+    container_name: myredis-container
+    ports:
+      - "6379:6379"  # 映射主机和容器的 6379 端口
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf  # 本地配置文件挂载到容器
+    restart: unless-stopped  # 容器重启策略

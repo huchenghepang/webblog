@@ -1,0 +1,1 @@
+import{l as o,j as n,d as t,f as r,p as a}from"./index-CKb1g0gP.js";const s={class:"MarkdownView-container"},d=o({__name:"MarkdownView",setup(c){return(_,i)=>{const e=n("router-view");return t(),r("div",s,[a(e)])}}});export{d as default};

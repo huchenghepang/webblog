@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0.25
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456   # 设置 root 密码
+      MYSQL_DATABASE: my_store            # 自动创建 my_store 数据库
+      MYSQL_USER: my_admin                # 创建 my_admin 用户
+      MYSQL_PASSWORD: 123456      # 设置 my_admin 用户的密码
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql-data:/var/lib/mysql

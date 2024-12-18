@@ -1,0 +1,34 @@
+# 使用官方 Redis 基础镜像
+FROM redis:latest
+
+# 设置工作目录
+WORKDIR /usr/local/etc/redis
+
+# 复制自定义配置文件到容器
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# 暴露 Redis 默认端口
+EXPOSE 6379
+
+# 启动 Redis 并指定配置文件
+
+# 在容器启动时执行的命令：
+# redis-server /usr/local/etc/redis/redis.conf：启动 Redis 并指定配置文件。
+# --appendonly yes：开启 AOF（Append Only File）持久化。
+# --requirepass "your_password"：设置访问密码。
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf", "--appendonly", "yes", "--requirepass", "15970460916"]
+
+# docker run -d --name redis-container \
+#   -p 6379:6379 \
+#   -v /path/to/redis.conf:/usr/local/etc/redis/redis.conf \
+#   --restart unless-stopped \
+#   my-redis
+
+# -d：让容器在后台运行。
+# --name redis-container：指定容器的名称为 redis-container。
+# -p 6379:6379：将主机的端口 6379 映射到容器的端口 6379，你可以通过主机的 6379 端口访问 Redis 服务。
+# -v /path/to/redis.conf:/usr/local/etc/redis/redis.conf：如果你有本地的配置文件 redis.conf，可以将它挂载到容器中。如果配置文件已经在 Dockerfile 中通过 COPY 指定，可以忽略这个挂载。
+# --restart unless-stopped：容器的重启策略，确保容器在系统重启时自动启动，除非你手动停止它。
+# my-redis：构建时给镜像指定的名称。
+# redis-server /usr/local/etc/redis/redis.conf --appendonly yes --requirepass "15970460916"：这是 Dockerfile 中 CMD 指令定义的启动命令，它会启动 Redis 服务，使用 redis.conf 配置文件，开启 AOF 持久化，并设置访问密码为 15970460916。
+# docker run -d --name redis-container -p 6379:6379 --restart unless-stopped my-redis

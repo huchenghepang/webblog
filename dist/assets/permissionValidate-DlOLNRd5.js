@@ -1,0 +1,1 @@
+import{M as a,aV as r}from"./index-CKb1g0gP.js";const t=a(),o=e=>s=>(...n)=>{if(!t.isHasButtonPermission(e)){r({message:"权限验证失败",type:"warning"});return}s.bind(s,...n)()},u=e=>t.isHasButtonPermission(e)?!0:(r({message:"权限验证失败",type:"warning"}),!1);export{o as a,u as p};

@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: .  # 构建上下文路径
+      dockerfile: Dockerfile  # 使用的 Dockerfile
+    container_name: mywebapp  # 容器名称
+    network_mode: host  # 使用主机网络模式
+    volumes:
+      - .:/usr/src/app  # 挂载项目代码到容器中
+      - /usr/src/app/node_modules  # 防止覆盖 node_modules
+    environment:
+      - NODE_ENV=production  # 设置环境变量 (如果有必要)
+
+  acme_certbot:
+    image: neilpang/acme.sh:latest  # 使用官方 acme.sh 镜像
+    container_name: acme_certbot
+    environment:
+      # 必须设置的 Cloudflare 环境变量（使用安全的 API Token）
+      - CF_Token=ut6w9e6KY2TAJLDLZNuP4FDJfSWW8QAX8oYyGwEI
+      - CF_Zone_ID=9abb2a42a02433bccb529d6f2a3b1dda  # 针对单一 DNS Zone 的配置
+      - CF_Account_ID=b7812137578e18bf375ced03df504e2b  # 账号 ID（管理多个 Zone 时）
+      - CF_Email=2927678784@qq.com  # 可选，用于标识
+      - PUID=1000  # 用户 ID，根据宿主机用户调整
+      - PGID=1000  # 组 ID，根据宿主机用户调整
+      - TZ=Asia/Shanghai  # 设置时区
+    volumes:
+      # 持久化证书和配置
+      - ./certs:/acme.sh/certs  # 挂载本地目录存储证书
+      - ./config:/acme.sh/config  # 配置文件路径
+    command: [
+      "--issue",
+      "--dns",
+      "dns_cf",
+      "-d",
+      "huchenghe.site",
+      "-d",
+      "www.huchenghe.site",
+      "-d",
+      "blog.huchenghe.site",
+      "--keylength",
+      "ec-256",
+      "--server",
+      "https://acme-v02.api.letsencrypt.org/directory",
+      "--accountemail",
+      "2927678784@qq.com",  # 这里填写你的邮箱
+      "--home",
+      "/acme.sh/config",
+      "--cert-home",
+      "/acme.sh/certs",
+    ]
+
+  web:
+    build:
+      context: .  # 构建上下文路径
+      dockerfile: web.dockerfile  # 使用的 Dockerfile
+    container_name: nginx_web  # 设置容器名称
+    ports:
+      - "80:80"  # HTTP
+      - "443:443"  # HTTPS
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # 挂载自定义的 Nginx 配置文件
+      - ./certs:/etc/nginx/certs  # 挂载证书目录
+    networks:
+      - webnet  # 服务间的私有网络
+    restart: always  # 异常退出时自动重启
+    
+networks:
+  webnet:  # 定义私有网络
+    driver: bridge

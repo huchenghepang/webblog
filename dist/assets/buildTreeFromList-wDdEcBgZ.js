@@ -1,0 +1,1 @@
+function n(s,e="id",a="parentId",c="children",f){const r=new Map;s.forEach(t=>{r.set(t[e],{...t,[c]:[]})});const o=[];return s.forEach(t=>{if(t[a]===f)o.push(r.get(t[e]));else{const p=r.get(t[a]);p&&p[c].push(r.get(t[e]))}}),o}export{n as b};

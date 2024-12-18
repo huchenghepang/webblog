@@ -1,0 +1,1 @@
+import{l as n,d as e,f as t,F as o,v as a,_ as c}from"./index-CKb1g0gP.js";const _={class:"meteor-container"},m=n({__name:"Meteor",props:{number:{type:Number,default:15}},setup(r){return(p,u)=>(e(),t("div",_,[(e(!0),t(o,null,a(r.number,s=>(e(),t("div",{key:s,class:"meteor"}))),128))]))}}),l=c(m,[["__scopeId","data-v-9838a88b"]]);export{l as M};
