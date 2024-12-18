@@ -290,7 +290,7 @@ docker compose -f redis/docker-compose.yml up -d
 
 ## 📖 API 文档
 
-完整的接口设计参照[API文档](./API.md);或者在线[API文档](https://app.apifox.com/project/5639097),密码：cFNu7pAF。
+完整的接口设计参照[API文档](./API.md);或者在线[API文档](https://sl6gtwnjxs.apifox.cn/),密码：cFNu7pAF。
 
 ---
 
