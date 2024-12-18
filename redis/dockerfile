@@ -16,7 +16,7 @@ EXPOSE 6379
 # redis-server /usr/local/etc/redis/redis.conf：启动 Redis 并指定配置文件。
 # --appendonly yes：开启 AOF（Append Only File）持久化。
 # --requirepass "your_password"：设置访问密码。
-CMD ["redis-server", "/usr/local/etc/redis/redis.conf", "--appendonly", "yes", "--requirepass", "15970460916"]
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf", "--appendonly", "yes", "--requirepass", "123456"]
 
 # docker run -d --name redis-container \
 #   -p 6379:6379 \
