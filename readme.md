@@ -79,7 +79,7 @@
  
   - **markdown-it** ：用于 Markdown 格式文章的解析与渲染。
  
-  - **socket.io** ：用于实现实时通讯（如评论实时更新）。
+  - **socket.io** ：用于实现实时通讯（如聊天消息实时更新）。
  
   - **moment** 、**moment-timezone** ：用于处理时间和时区。
  
